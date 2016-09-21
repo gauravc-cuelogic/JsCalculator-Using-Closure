@@ -1,0 +1,108 @@
+<html>
+
+<head>
+  <script src="JS/index.js"></script>
+  <style>
+  .cursor{
+    cursor: pointer;
+  }
+  input{
+    width: 99%;
+  }
+  </style>
+</head>
+
+<body>
+    <form Name="calc">
+        <table border=2>
+            <tr>
+                <td colspan=4>
+                    <input type=text Name="display" style="text-align: right;" readonly="readonly">
+                </td>
+            </tr>
+            <tr>
+
+                <td>
+                    <input type=button value="1" onclick="newInput('1')">
+                </td>
+                <td>
+                    <input type=button value="2" onclick="newInput('2')">
+                </td>
+                <td>
+                    <input type=button value="3" onclick="newInput('3')">
+                </td>
+                <td>
+                    <input type=button value="+" onclick="newInput('+')">
+                </td>
+            </tr>
+            <tr>
+
+                <td>
+                    <input type=button value="4" onclick="newInput('4')">
+                </td>
+                <td>
+                    <input type=button value="5" onclick="newInput('5')">
+                </td>
+                <td>
+                    <input type=button value="6" onclick="newInput('6')">
+                </td>
+                <td>
+                    <input type=button value="-" onclick="newInput('-')">
+                </td>
+            </tr>
+            <tr>
+
+                <td>
+                    <input type=button value="7" onclick="newInput('7')">
+                </td>
+                <td>
+                    <input type=button value="8" onclick="newInput('8')">
+                </td>
+                <td>
+                    <input type=button value="9" onclick="newInput('9')">
+                </td>
+                <td>
+                    <input type=button value="x" onclick="newInput('*')">
+                </td>
+            </tr>
+            <tr>
+              <td>
+                  <input type=button value="0" onclick="newInput('0')">
+              </td>
+
+                <td>
+                    <input type=button value="C" onclick="newInput('C')">
+                </td>
+                <td>
+                    <input type=button value="=" onclick="newInput('=')">
+                </td>
+                <td>
+                    <input type=button value="/" onclick="newInput('/')">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div id="listCalculations">
+
+    </div>
+</body>
+
+</html>
+<script>
+var calculator = new Calculate();
+calculator.evaluateInput();
+function newInput (newInput) {
+  calculator.setInput(newInput);
+}
+
+function deleteCalculation (storageKey) {
+  localStorage.removeItem(storageKey);
+  calculator.evaluateInput();
+}
+
+function loadInputs(storageKey){
+  calculator.storedKey = storageKey;
+  var input = JSON.parse(localStorage.getItem(storageKey));
+  document.getElementsByName('display')[0].value = input.input;
+}
+</script>
